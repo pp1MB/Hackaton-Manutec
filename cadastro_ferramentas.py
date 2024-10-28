@@ -6,13 +6,6 @@ class Disponibilidades:
     def __init__(self, ferramentas):
         self.ferramentas = ferramentas
 
-    def existe_ferramenta(self, nome):
-        if nome in self.ferramentas:
-            return True
-        else:
-            print("Ferramenta não encontrada")
-            return False
-
     def listar_ferramentas(self):
         for ferramenta in self.ferramentas.values():
             print(ferramenta)
@@ -20,19 +13,20 @@ class Disponibilidades:
     def nova_reserva(self, ferramenta, hora):
         if ferramenta in self.ferramentas:
             self.ferramentas[ferramenta]._nova_reserva(hora)
-            return True
-        return False
-
+        else:
+            print("Ferramenta não encontrada")
     def cancelar_reserva(self, ferramenta, hora):
         if ferramenta in self.ferramentas:
             self.ferramentas[ferramenta]._cancelar_reserva(hora)
-            return True
-        return False
+        else:
+            print("Ferramenta não encontrada")
 
     def checar_disponibilidade(self, ferramenta, hora):
         if ferramenta in self.ferramentas:
             return self.ferramentas[ferramenta]._checar_disponibilidade(hora)
-        return False
+        else:
+            print("Ferramenta não encontrada")
+            return False
         
     def novo_dia(self):
         for ferramenta in self.ferramentas.values():
@@ -118,57 +112,51 @@ def main():
                 
             case "2":
                 ferramenta = input("Digite o nome da ferramenta: ")
-                
-                if disponibilidades.existe_ferramenta(ferramenta):
-                    try:
-                        horas = input("Digite a(s) hora(s) da reserva (ex: 9 ou 9-11): ")
-                        if '-' in horas:
-                            inicio, fim = map(int, horas.split('-'))
-                            for hora in range(inicio, fim + 1):
-                                disponibilidades.nova_reserva(ferramenta, hora)
-                            print(f"Reserva feita para {ferramenta} das {inicio}h às {fim}h.")
-                        else:
-                            hora = int(horas)
+                try:
+                    horas = input("Digite a(s) hora(s) da reserva (ex: 9 ou 9-11): ")
+                    if '-' in horas:
+                        inicio, fim = map(int, horas.split('-'))
+                        for hora in range(inicio, fim + 1):
                             disponibilidades.nova_reserva(ferramenta, hora)
-                            print(f"Reserva feita para {ferramenta} às {hora}h.")
-                    except ValueError:
-                        print("Hora(s) inválida(s). Por favor, digite um número inteiro ou um intervalo válido.")
+                        print(f"Reserva feita para {ferramenta} das {inicio}h às {fim}h.")
+                    else:
+                        hora = int(horas)
+                        disponibilidades.nova_reserva(ferramenta, hora)
+                        print(f"Reserva feita para {ferramenta} às {hora}h.")
+                except ValueError:
+                    print("Hora(s) inválida(s). Por favor, digite um número inteiro ou um intervalo válido.")
             
             case "3":
                 ferramenta = input("Digite o nome da ferramenta: ")
-
-                if disponibilidades.existe_ferramenta(ferramenta):
-                    try:
-                        horas = input("Digite a(s) hora(s) da reserva a cancelar (ex: 9 ou 9-11): ")
-                        if '-' in horas:
-                            inicio, fim = map(int, horas.split('-'))
-                            for hora in range(inicio, fim + 1):
-                                disponibilidades.cancelar_reserva(ferramenta, hora)
-                            print(f"Reserva cancelada para {ferramenta} das {inicio}h às {fim}h.")
-                        else:
-                            hora = int(horas)
+                try:
+                    horas = input("Digite a(s) hora(s) da reserva a cancelar (ex: 9 ou 9-11): ")
+                    if '-' in horas:
+                        inicio, fim = map(int, horas.split('-'))
+                        for hora in range(inicio, fim + 1):
                             disponibilidades.cancelar_reserva(ferramenta, hora)
-                            print(f"Reserva cancelada para {ferramenta} às {hora}h.")
-                    except ValueError:
-                        print("Hora(s) inválida(s). Por favor, digite um número inteiro ou um intervalo válido.")
+                        print(f"Reserva cancelada para {ferramenta} das {inicio}h às {fim}h.")
+                    else:
+                        hora = int(horas)
+                        disponibilidades.cancelar_reserva(ferramenta, hora)
+                        print(f"Reserva cancelada para {ferramenta} às {hora}h.")
+                except ValueError:
+                    print("Hora(s) inválida(s). Por favor, digite um número inteiro ou um intervalo válido.")
 
             case "4":
                 ferramenta = input("Digite o nome da ferramenta: ")
-
-                if disponibilidades.existe_ferramenta(ferramenta):
-                    try:
-                        horas = input("Digite a(s) hora(s) da reserva (ex: 9 ou 9-11): ")
-                        if '-' in horas:
-                            inicio, fim = map(int, horas.split('-'))
-                            for hora in range(inicio, fim + 1):
-                                disponibilidade = disponibilidades.checar_disponibilidade(ferramenta, hora)
-                                print(f"Hora {hora}: {'Disponível' if disponibilidade else 'Indisponível'}")
-                        else:
-                            hora = int(horas)
+                try:
+                    horas = input("Digite a(s) hora(s) da reserva (ex: 9 ou 9-11): ")
+                    if '-' in horas:
+                        inicio, fim = map(int, horas.split('-'))
+                        for hora in range(inicio, fim + 1):
                             disponibilidade = disponibilidades.checar_disponibilidade(ferramenta, hora)
                             print(f"Hora {hora}: {'Disponível' if disponibilidade else 'Indisponível'}")
-                    except ValueError:
-                        print("Hora(s) inválida(s). Por favor, digite um número inteiro ou um intervalo válido.")
+                    else:
+                        hora = int(horas)
+                        disponibilidade = disponibilidades.checar_disponibilidade(ferramenta, hora)
+                        print(f"Hora {hora}: {'Disponível' if disponibilidade else 'Indisponível'}")
+                except ValueError:
+                    print("Hora(s) inválida(s). Por favor, digite um número inteiro ou um intervalo válido.")
             
             case "5":
                 disponibilidades.novo_dia()
