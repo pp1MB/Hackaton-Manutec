@@ -29,3 +29,8 @@ Antes de executar o projeto, certifique-se de ter o seguinte instalado:
 - PIL
 - tkinter (para exibição da interface)
 - openai (Para GPT API)
+
+## Rodar o app
+
+Para utilizar o app, navegue até a página onde está o projeto e execute o comando
+python3 interface.py
