@@ -17,6 +17,7 @@ Este projeto é uma aplicação de gerenciamento de tarefas que permite aos usu�
 - Python
 - Tkinter (para a interface gráfica)
 - Pydub (para manipulação de áudio)
+- GPT API (para gerar tasklists automaticamente e sugerir ferramentas)
 
 ## Requisitos
 
