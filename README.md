@@ -34,3 +34,8 @@ Antes de executar o projeto, certifique-se de ter o seguinte instalado:
 
 Para utilizar o app, navegue até a página onde está o projeto e execute o comando
 python3 interface.py
+
+## Cadastro de ferramentas
+
+Para utilizar o cadastro de ferramentas, navegue até a página onde está o projeto e execute o comando
+python3 cadastro_ferramentas.py 
